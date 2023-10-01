@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "noEmitOnError": true,
+        "declaration": true,
+        "declarationDir": "lib/dts",
+        "lib": [ "dom", "esnext", "es5", "es6" ],
+        "strict": true,  
+        "esModuleInterop": false,
+        "outDir": "./lib",
+        "rootDir": "./src",
+		"baseUrl": "./src",
+        "typeRoots": [ "./lib/types.d.ts" ],
+    },
+    "include": [ "./src/index.ts" ],
+    "exclude": [ "./node_modules/**/*", "./dist/**/*", "./lib/**/*", "./build/**/*" ]
+}
