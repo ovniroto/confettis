@@ -1,10 +1,10 @@
 ![Confettis](https://i.imgur.com/GVG84eS.png)
 
-# 🎉 Confettis v0.1.1
+# 🎉 Confettis v0.1.2
 
 [![NPM](https://img.shields.io/npm/v/confettis.svg)](https://www.npmjs.com/package/confettis)
 [![GitHub Issues](https://img.shields.io/github/issues/ovniroto/confettis)](https://github.com/ovniroto/confettis/issues)
-[![GitHub Tag](https://img.shields.io/github/tag/ovniroto/confetti.svg)](https://github.com/ovniroto/confettis/tags)
+[![GitHub Tag](https://img.shields.io/github/tag/ovniroto/confettis.svg)](https://github.com/ovniroto/confettis/tags)
 [![GitHub Commits](https://img.shields.io/github/commit-activity/t/ovniroto/confettis)](https://github.com/ovniroto/confettis/commits/main/)
 [![GitHub License](https://img.shields.io/github/license/ovniroto/confettis)](https://github.com/ovniroto/confettis/blob/main/LICENSE)
 
@@ -21,12 +21,12 @@ This is a small lib to add confettis to your website. Yep, confettis! 🎉
 
 Browser:
 ```html
-<script src="https://cdn.jsdelivr.net/npm/confettis@0.1.1/lib/confettis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/confettis@0.1.2/lib/confettis.min.js"></script>
 ```
 
 Deno:
 ```js
-import * as OU from 'https://esm.sh/confettis@0.1.1'
+import * as confetti from 'https://esm.sh/confettis@0.1.2'
 ```
 
 Node:
@@ -34,7 +34,7 @@ Node:
 $ npm i confettis
 ```
 ```js
-import * as OU from 'confettis'
+import * as confetti from 'confettis'
 ```
 
 ## Usage
@@ -89,7 +89,7 @@ Accepted shapes
 
 
 ## Contributors
-All issue reports, feature requests, pull requests and GitHub stars are welcomed and much appreciated.
+All issue reports, feature requests, pull requests and github stars are welcomed and much appreciated.
 
 ## Thanks
 Special thanks to catdad for creating [canvas-confetti](https://github.com/catdad/canvas-confetti). I have created this project as inspiration to obtain a cleaner and legible code in typescript.
