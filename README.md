@@ -18,7 +18,7 @@ This is a small lib to add confettis to your website. Yep, confettis! 🎉
 
 Browser:
 ```html
-<script src="https://cdn.jsdelivr.net/npm/confettis@0.1.0/dist/confettis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/confettis@0.1.0/lib/confettis.min.js"></script>
 ```
 
 Deno:
