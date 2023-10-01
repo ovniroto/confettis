@@ -127,7 +127,7 @@ const createSquare = (data: Square): void => {
  */
 const createStar = (data: Star): void => {
 
-    var rot = (Math.PI / 2) * 3
+    var rotation = (Math.PI / 2) * 3
     var spikes = 5
 
     const innerRadius = 4 * data.scale
@@ -139,17 +139,17 @@ const createStar = (data: Star): void => {
 
     while (spikes--) {
 
-        const x1 = data.x + (Math.cos(rot) * outerRadius)
-        const y1 = data.y + (Math.sin(rot) * outerRadius)
+        const x1 = data.x + (Math.cos(rotation) * outerRadius)
+        const y1 = data.y + (Math.sin(rotation) * outerRadius)
 
         context.lineTo(x1, y1)
-        rot += step
+        rotation += step
 
-        const x2 = data.x + (Math.cos(rot) * innerRadius)
-        const y2 = data.y + (Math.sin(rot) * innerRadius)
+        const x2 = data.x + (Math.cos(rotation) * innerRadius)
+        const y2 = data.y + (Math.sin(rotation) * innerRadius)
 
         context.lineTo(x2, y2)
-        rot += step
+        rotation += step
 
     }
 

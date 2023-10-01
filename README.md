@@ -61,9 +61,9 @@ When creating a new confetti you can change the parameters to change the positio
 | --- | --- | --- | --- |
 | `canvas` | `string` | confettis | Id of canvas where you are going to show the confetti. If you do not put anything, a canvas will be created with id "confettis". |
 | `count` | `number` | 50 | Number of confetti to launch. Remember that the more particles the web performance will be worse. The recommended is between 1 and 300 particles per second. |
-| `angle` | `number` | 90 | El ángulo en el que se va a lanzar el confetti. En grados (0-360) |
-| `spread` | `number` | 70 | Lo lejor que puede llegar el confetti. En grados (0-360) |
-| `velocity` | `number` | 45 | Velocidad con la que el confetti comenzará a moverse. |
+| `angle` | `number` | 90 | The angle at which the confetti is going to be released. In degrees (0-360) |
+| `spread` | `number` | 70 | How far the confetti can come. In degrees (0-360) |
+| `velocity` | `number` | 45 | Speed with which the confetti will begin to move. |
 | `decay` | `number` | 0.9 | Determine the speed with which the confetti will lose speed. Keep this number between 0 and 1 so that the confetti does not go to the speed of light. |
 | `scales` | `[number]` | 1 | Scale factor for each confetti particle. Use decimals to make the confetti smaller. Example: [ 0.8, 1, 1.3 ] |
 | `gravity` | `number` | 0.9 | Gravity determine how quickly the confetti will fall. You can play with this parameter to make it fall faster or slower, and you can even make the confetti rise up. |
@@ -75,6 +75,17 @@ When creating a new confetti you can change the parameters to change the positio
 | `colors` | `[string]` |  | Array with strings of the colors you want to show the confetti. The colors must be in Hex format (#ffffff). |
 | `shapes` | `[string]` |  | An array of shapes for the confetti. |
 | `emojis` | `[string]` |  | An array of emojis for the confetti. |
+
+
+Accepted shapes
+
+| Shape | Description |
+| --- | --- |
+| `square` | Create common square confetti. |
+| `ellipse` | Create confetti in the form of ellipse. |
+| `circle` | Create confetti in the form of a circle. |
+| `star` | Create confetti in the form of star with five spikes. |
+| `emoji` | Create confetti with emojis. |
 
 
 ## Contributors
