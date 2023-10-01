@@ -75,3 +75,10 @@ When creating a new confetti you can change the parameters to change the positio
 | `colors` | `[string]` |  | Array with strings of the colors you want to show the confetti. The colors must be in Hex format (#ffffff). |
 | `shapes` | `[string]` |  | An array of shapes for the confetti. |
 | `emojis` | `[string]` |  | An array of emojis for the confetti. |
+
+
+## Contributors
+All issue reports, feature requests, pull requests and GitHub stars are welcomed and much appreciated.
+
+## Thanks
+Special thanks to catdad for creating [canvas-confetti](https://github.com/catdad/canvas-confetti). I have created this project as inspiration to obtain a cleaner and legible code in typescript.
