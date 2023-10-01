@@ -1,9 +1,12 @@
+![Confettis](https://i.imgur.com/GVG84eS.png)
+
 # 🎉 Confettis v0.1.0
 
-![GitHub issues](https://img.shields.io/github/issues/ovniroto/confettis)
-[![tag](https://img.shields.io/github/tag/ovniroto/confetti.svg)](https://github.com/ovniroto/confettis/tags)
-![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/t/ovniroto/confettis)
-![GitHub License](https://img.shields.io/github/license/ovniroto/confettis)
+[![NPM](https://img.shields.io/npm/v/confettis.svg)](https://www.npmjs.com/package/confettis)
+[![GitHub Issues](https://img.shields.io/github/issues/ovniroto/confettis)](https://github.com/ovniroto/confettis/issues)
+[![GitHub Tag](https://img.shields.io/github/tag/ovniroto/confetti.svg)](https://github.com/ovniroto/confettis/tags)
+[![GitHub Commits](https://img.shields.io/github/commit-activity/t/ovniroto/confettis)](https://github.com/ovniroto/confettis/commits/main/)
+[![GitHub License](https://img.shields.io/github/license/ovniroto/confettis)](https://github.com/ovniroto/confettis/blob/main/LICENSE)
 
 This is a small lib to add confettis to your website. Yep, confettis! 🎉
 
