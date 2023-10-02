@@ -96,6 +96,7 @@ export type ConfettiProps = {
 }
 
 export type ConfettiProperties = {
+    opacity: boolean
     tick: number
     progress: number
     color: {

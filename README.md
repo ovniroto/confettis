@@ -1,6 +1,6 @@
 ![Confettis](https://i.imgur.com/GVG84eS.png)
 
-# 🎉 Confettis v0.1.2
+# 🎉 Confettis v0.2.0
 
 [![NPM](https://img.shields.io/npm/v/confettis.svg)](https://www.npmjs.com/package/confettis)
 [![GitHub Issues](https://img.shields.io/github/issues/ovniroto/confettis)](https://github.com/ovniroto/confettis/issues)
@@ -21,12 +21,12 @@ This is a small lib to add confettis to your website. Yep, confettis! 🎉
 
 Browser:
 ```html
-<script src="https://cdn.jsdelivr.net/npm/confettis@0.1.2/lib/confettis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/confettis@0.2.0/lib/confettis.min.js"></script>
 ```
 
 Deno:
 ```js
-import * as confetti from 'https://esm.sh/confettis@0.1.2'
+import * as confetti from 'https://esm.sh/confettis@0.2.0'
 ```
 
 Node:
@@ -68,10 +68,10 @@ When creating a new confetti you can change the parameters to change the positio
 | `scales` | `[number]` | 1 | Scale factor for each confetti particle. Use decimals to make the confetti smaller. Example: [ 0.8, 1, 1.3 ] |
 | `gravity` | `number` | 0.9 | Gravity determine how quickly the confetti will fall. You can play with this parameter to make it fall faster or slower, and you can even make the confetti rise up. |
 | `drift` | `number` | 0 | Determine the side where the confetti will go. 0 indicates that it will fall down. A negative number indicates that it will go to the left, and a positive number indicates that it will go to the right. |
-| `ticks` | `number` | 200 | Time that confetti will take to disappear. The higher the number, it will take longer to disappear. |
+| `ticks` | `number` | 200 | Time that confetti will take to disappear (opacity). The higher the number, it will take longer to disappear. Put it in -1 to deactivate it and make it always visible. |
 | `x` | `number` | 0.5 | The X position is horizontal, being 0 the left edge and 1 the right edge. |
 | `y` | `number` | 0.5 | The Y position is vertical, being 0 the upper edge and 1 the lower edge. |
-| `z` | `number` | 100  | The Z position on the page (z-index). Determine whether it is shown above or below other web elements. The higher the number, it will be shown above all (recommended). |
+| `z` | `number` | MAX_SAFE_INTEGER | The Z position on the page (z-index). Determine whether it is shown above or below other web elements. The higher the number, it will be shown above all (recommended). Default is Number.MAX_SAFE_INTEGER (2^53 − 1) to overcome the height of most popular UI libs. |
 | `colors` | `[string]` |  | Array with strings of the colors you want to show the confetti. The colors must be in Hex format (#ffffff). |
 | `shapes` | `[string]` |  | An array of shapes for the confetti. |
 | `emojis` | `[string]` |  | An array of emojis for the confetti. |

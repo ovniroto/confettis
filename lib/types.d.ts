@@ -1,6 +1,6 @@
 /*
  *
- *  🎉 Confettis v0.1.2
+ *  🎉 Confettis v0.2.0
  *  https://github.com/ovniroto/confettis
  *
  *  (c) 2023 Lucas O. S.

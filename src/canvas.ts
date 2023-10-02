@@ -12,7 +12,7 @@ const createCanvas = (): HTMLCanvasElement => {
 
     canvas.id = "confettis"
 
-    canvas.style.zIndex = "100"
+    canvas.style.zIndex = `${Number.MAX_SAFE_INTEGER}`
     canvas.style.position = 'fixed'
     canvas.style.top = '0px'
     canvas.style.left = '0px'
@@ -28,12 +28,11 @@ const createCanvas = (): HTMLCanvasElement => {
  * Set canvas z-index
  *
  * @param {string} id `string` Default "confettis"
- * @param {string} z `string` Default "100"
+ * @param {string} z `string` Default Number.MAX_SAFE_INTEGER (2^53 − 1)
  * @return {HTMLCanvasElement}  HTMLCanvasElement
  */
-const setCanvasZIndex = (id: string = "confettis", z: number = 100): void => {
+const setCanvasZIndex = (id: string = "confettis", z: number = Number.MAX_SAFE_INTEGER): void => {
     let canvas = document.getElementById(id) as unknown as HTMLCanvasElement
-    if(!canvas) canvas = createCanvas()
     canvas.style.zIndex = `${z}`
 }
 

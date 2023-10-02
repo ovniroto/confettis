@@ -15,7 +15,7 @@ const confettiGlobals: ConfettiGlobals = {
     angle: 90,
     spread: 70,
     velocity: 45,
-    scales: [ 1 ],
+    scales: [ 0.7, 0.8 ],
     x: 0.5,
     y: 0.5,
     z: 100,
@@ -194,6 +194,7 @@ const confettiProperties = (): ConfettiProperties => {
     const random = Math.random() + 2
 
     return {
+        opacity: ticks >= 0,
         tick: 0,
         progress: 0,
         color: color,
@@ -254,7 +255,9 @@ const createConfettiShape = (context: CanvasRenderingContext2D, fetti: ConfettiP
     var x2 = fetti.wabble.x + (fetti.random * fetti.tilt.cos)
     var y2 = fetti.wabble.y + (fetti.random * fetti.tilt.sin)
 
-    context.fillStyle = 'rgba(' + fetti.color.r + ', ' + fetti.color.g + ', ' + fetti.color.b + ', ' + (1 - fetti.progress) + ')'
+    fetti.opacity ? 
+    (context.fillStyle = 'rgba(' + fetti.color.r + ', ' + fetti.color.g + ', ' + fetti.color.b + ', ' + (1 - fetti.progress) + ')') :
+    (context.fillStyle = 'rgb(' + fetti.color.r + ', ' + fetti.color.g + ', ' + fetti.color.b + ')')
 
     if(fetti.shape == 'ellipse') {
 
@@ -331,6 +334,8 @@ const createConfettiShape = (context: CanvasRenderingContext2D, fetti: ConfettiP
  * @return {void} 
  */
 const renderConfetti = (): void => {
+
+    if(!window) return
 
     const canvas = fettiGlobals ? fettiGlobals.canvas ? getCanvas(fettiGlobals.canvas) : getCanvas() : getCanvas()
     const context: any = canvas.getContext("2d")
