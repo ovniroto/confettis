@@ -67,6 +67,7 @@ export type ConfettiGlobals = {
     spread: number
     velocity: number
     scales: number[]
+    static: boolean
     x: number
     y: number
     z: number
@@ -87,6 +88,7 @@ export type ConfettiProps = {
     spread?: number
     velocity?: number
     scales?: number[]
+    static?: boolean
     x?: number
     y?: number
     z?: number
@@ -113,6 +115,7 @@ export type ConfettiProperties = {
     decay: number
     scale: number,
     random: number
+    static: boolean
     wabble: {
         w: number
         x: number

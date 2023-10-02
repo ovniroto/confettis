@@ -10,3 +10,8 @@ export const convertHexToRGB = (hex: string): RGB | null => {
         b: parseInt(result[3], 16)
     } : null
 }
+
+export const isSSR = (() => {
+    if (typeof window === 'undefined' || typeof window.requestAnimationFrame === 'undefined') return true
+    return false
+})()

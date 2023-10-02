@@ -1,5 +1,5 @@
 import { getCanvas, getCanvasOrigin, setCanvasZIndex } from './canvas'
-import { randomNumberBetween, convertHexToRGB } from './utils'
+import { randomNumberBetween, convertHexToRGB, isSSR } from './utils'
 import { Ellipse, Circle, Square, Star, Emoji, ConfettiProperties, ConfettiGlobals, ConfettiProps, RGB } from './types'
 
 const fettis: any = []
@@ -16,6 +16,7 @@ const confettiGlobals: ConfettiGlobals = {
     spread: 70,
     velocity: 45,
     scales: [ 0.7, 0.8 ],
+    static: false,
     x: 0.5,
     y: 0.5,
     z: 100,
@@ -38,8 +39,9 @@ const confettiGlobals: ConfettiGlobals = {
  *
  * @return {void}
  */
-const createConfetti = (props: ConfettiProps = confettiGlobals): void => {
-    fettiGlobals = props
+const createConfetti = (props?: ConfettiProps): void => {
+    if (isSSR) return
+    fettiGlobals = props ? props : confettiGlobals
     fillConfettiCannon()
 }
 
@@ -182,16 +184,20 @@ const confettiProperties = (): ConfettiProperties => {
     
     const scale = scales[Math.floor(randomNumberBetween(0, scales.length))]
     const emoji = emojis[Math.floor(randomNumberBetween(0, emojis.length))]
-    const color = convertHexToRGB(colors[Math.floor(randomNumberBetween(0, colors.length))]) as unknown as RGB
     const shape = shapes[Math.floor(randomNumberBetween(0, shapes.length))]
+    const color = convertHexToRGB(colors[Math.floor(randomNumberBetween(0, colors.length))]) as unknown as RGB
+    const speed = (velocity * 0.5) + (Math.random() * velocity)
+    
     const tiltAngle = (Math.random() * (0.75 - 0.25) + 0.25) * Math.PI
     const radiusAngle = angle * (Math.PI / 180)
     const radiusSpread = spread * (Math.PI / 180)
+    const angle2D = -radiusAngle + ((0.5 * radiusSpread) - (Math.random() * radiusSpread))
+
     const wabble = Math.random() * 10
     const wabbleSpeed = Math.min(0.11, Math.random() * 0.1 + 0.05)
-    const speed = (velocity * 0.5) + (Math.random() * velocity)
-    const angle2D = -radiusAngle + ((0.5 * radiusSpread) - (Math.random() * radiusSpread))
     const random = Math.random() + 2
+
+    const stattic = props ? props.static ? props.static : false : false
 
     return {
         opacity: ticks >= 0,
@@ -207,6 +213,7 @@ const confettiProperties = (): ConfettiProperties => {
         decay: decay,
         scale: scale,
         random: random,
+        static: stattic,
         wabble: {
             w: wabble,
             x: 0,
@@ -227,17 +234,36 @@ const confettiProperties = (): ConfettiProperties => {
             y: yPos
         },
         update: function () {
+
             this.position.x += Math.cos(this.angle2D) * this.velocity + this.drift
             this.position.y += Math.sin(this.angle2D) * this.velocity + this.gravity
             this.velocity *= this.decay
-            this.tilt.angle += 0.1
-            this.tilt.sin = Math.sin(this.tilt.angle)
-            this.tilt.cos = Math.cos(this.tilt.angle)
-            this.random = Math.random() + 2
-            this.wabble.w += this.wabble.speed
-            this.wabble.x = this.position.x + ((10 * scale) * Math.cos(this.wabble.w))
-            this.wabble.y = this.position.y + ((10 * scale) * Math.sin(this.wabble.w))
+
+            if(this.static) {
+
+                this.tilt.sin = 0
+                this.tilt.cos = 0
+                this.random = 1
+
+                this.wabble.w = 0
+                this.wabble.x = this.position.x + (10 * scale)
+                this.wabble.y = this.position.y + (10 * scale)
+
+            } else {
+
+                this.tilt.angle += 0.1
+                this.tilt.sin = Math.sin(this.tilt.angle)
+                this.tilt.cos = Math.cos(this.tilt.angle)
+
+                this.random = Math.random() + 2
+                this.wabble.w += this.wabble.speed
+                this.wabble.x = this.position.x + ((10 * scale) * Math.cos(this.wabble.w))
+                this.wabble.y = this.position.y + ((10 * scale) * Math.sin(this.wabble.w))
+                
+            }
+
             this.progress = (this.tick++) / ticks
+
         }
     }
 }
@@ -335,8 +361,6 @@ const createConfettiShape = (context: CanvasRenderingContext2D, fetti: ConfettiP
  */
 const renderConfetti = (): void => {
 
-    if(!window) return
-
     const canvas = fettiGlobals ? fettiGlobals.canvas ? getCanvas(fettiGlobals.canvas) : getCanvas() : getCanvas()
     const context: any = canvas.getContext("2d")
 
@@ -348,7 +372,7 @@ const renderConfetti = (): void => {
         fetti.update()
         createConfettiShape(context, fetti)
     })
-  
+
     fettis.forEach((fetti: any, index: number) => {
         if (fetti.position.y >= canvas.height || fetti.position.y <= 0) fettis.splice(index, 1)
         if (fetti.position.x >= canvas.width || fetti.position.x <= 0) fettis.splice(index, 1)

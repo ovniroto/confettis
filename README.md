@@ -1,6 +1,6 @@
 ![Confettis](https://i.imgur.com/GVG84eS.png)
 
-# 🎉 Confettis v0.2.0
+# 🎉 Confettis v0.2.3
 
 [![NPM](https://img.shields.io/npm/v/confettis.svg)](https://www.npmjs.com/package/confettis)
 [![GitHub Issues](https://img.shields.io/github/issues/ovniroto/confettis)](https://github.com/ovniroto/confettis/issues)
@@ -9,6 +9,15 @@
 [![GitHub License](https://img.shields.io/github/license/ovniroto/confettis)](https://github.com/ovniroto/confettis/blob/main/LICENSE)
 
 This is a small lib to add confettis to your website. Yep, confettis! 🎉
+
+* 😊 SSR Support
+* 🎉 Common confettis
+* 👽 Emoji coffetis
+* ⭐️ Star confettis
+* 🟡 Circle confettis (snow?)
+* ✨ Confettis with different sizes
+* 🗿 Static or moving confettis
+* 😄 Super easy to use!
 
 ### Demo
 [cofetti.deno.dev](https://cofetti.deno.dev)
@@ -21,12 +30,12 @@ This is a small lib to add confettis to your website. Yep, confettis! 🎉
 
 Browser:
 ```html
-<script src="https://cdn.jsdelivr.net/npm/confettis@0.2.0/lib/confettis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/confettis@0.2.3/lib/confettis.min.js"></script>
 ```
 
 Deno:
 ```js
-import * as confetti from 'https://esm.sh/confettis@0.2.0'
+import * as confetti from 'https://esm.sh/confettis@0.2.3'
 ```
 
 Node:
@@ -92,4 +101,4 @@ Accepted shapes
 All issue reports, feature requests, pull requests and github stars are welcomed and much appreciated.
 
 ## Thanks
-Special thanks to catdad for creating [canvas-confetti](https://github.com/catdad/canvas-confetti). I have created this project as inspiration to obtain a cleaner and legible code in typescript.
+Special thanks to catdad for [canvas-confetti](https://github.com/catdad/canvas-confetti). I have created this project as inspiration to obtain a cleaner and legible code in typescript.

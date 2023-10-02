@@ -1,6 +1,6 @@
 /*
  *
- *  🎉 Confettis v0.2.0
+ *  🎉 Confettis v0.2.3
  *  https://github.com/ovniroto/confettis
  *
  *  (c) 2023 Lucas O. S.
@@ -21,6 +21,7 @@ type ConfettiProps = {
     spread?: number;
     velocity?: number;
     scales?: number[];
+    static?: boolean;
     x?: number;
     y?: number;
     z?: number;
