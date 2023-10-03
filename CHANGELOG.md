@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.5
+
+Release 3 oct 2023
+
+  * Reverts elimination prevention of confetti. It is more optimal coordinates such as 0.001 (top or left) or 1.999 (right or bottom).
+
 ### 0.2.4
 
 Release 3 oct 2023

@@ -1,6 +1,6 @@
 ![Confettis](https://i.imgur.com/GVG84eS.png)
 
-# 🎉 Confettis v0.2.4
+# 🎉 Confettis v0.2.5
 
 [![NPM](https://img.shields.io/npm/v/confettis.svg)](https://www.npmjs.com/package/confettis)
 [![GitHub Issues](https://img.shields.io/github/issues/ovniroto/confettis)](https://github.com/ovniroto/confettis/issues)
@@ -23,19 +23,19 @@ This is a small lib to add confettis to your website. Yep, confettis! 🎉
 [cofetti.deno.dev](https://cofetti.deno.dev)
 
 ### Resources
-- [Documentation](https://github.com/ovniroto/confettis/wiki/Examples)
+- [Documentation](https://cofetti.deno.dev/docs)
 - [Changelog](https://github.com/ovniroto/confettis/blob/main/CHANGELOG.md)
 
 ## Installation
 
 Browser:
 ```html
-<script src="https://cdn.jsdelivr.net/npm/confettis@0.2.4/lib/confettis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/confettis@0.2.5/lib/confettis.min.js"></script>
 ```
 
 Deno:
 ```js
-import * as confetti from 'https://esm.sh/confettis@0.2.4'
+import * as confetti from 'https://esm.sh/confettis@0.2.5'
 ```
 
 Node:
@@ -62,6 +62,8 @@ confetti.create({
 })
 ```
 
+You can see more examples on the web.
+
 ## Options
 
 When creating a new confetti you can change the parameters to change the position, particle count, angle, gravity, etc.
@@ -81,7 +83,7 @@ When creating a new confetti you can change the parameters to change the positio
 | `static` | `boolean` | false | It allows to create static confetti. Perfect if you want `square` or ` ellipse` confetti without moving when falling. |
 | `x` | `number` | 0.5 | The X position is horizontal, being 0 the left edge and 1 the right edge. |
 | `y` | `number` | 0.7 | The Y position is vertical, being 0 the upper edge and 1 the lower edge. |
-| `z` | `number` | MAX_SAFE_INTEGER | The Z position on the page (z-index). Determine whether it is shown above or below other web elements. The higher the number, it will be shown above all (recommended). Default is Number.MAX_SAFE_INTEGER (2^53 − 1) to overcome the height of most popular UI libs. |
+| `z` | `number` | MAX_SAFE_INTEGER | The Z position on the page (z-index). Determine whether it is shown above or below other web elements. The higher the number, it will be shown above all (recommended). Default is Number.MAX_SAFE_INTEGER (2147483647) to overcome the height of most popular UI libs. |
 | `colors` | `[string]` |  | Array with strings of the colors you want to show the confetti. The colors must be in Hex format (#ffffff). |
 | `shapes` | `[string]` |  | An array of shapes for the confetti. |
 | `emojis` | `[string]` |  | An array of emojis for the confetti. |
@@ -102,4 +104,4 @@ Accepted shapes
 All issue reports, feature requests, pull requests and github stars are welcomed and much appreciated.
 
 ## Thanks
-Special thanks to catdad for [canvas-confetti](https://github.com/catdad/canvas-confetti). I have created this project as inspiration to obtain a cleaner and legible code in typescript.
+Special thanks to catdad for [canvas-confetti](https://github.com/catdad/canvas-confetti). I have created this project as inspiration to obtain a cleaner and legible code in typescript, and add extra functions.

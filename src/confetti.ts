@@ -363,16 +363,8 @@ const renderConfetti = (): void => {
     })
 
     fettis.forEach((fetti: any, index: number) => {
-
-        const prevRight = fettiGlobals ? fettiGlobals.x ? fettiGlobals.x > 1 ? 100 : 0 : 0 : 0
-        const prevLeft = fettiGlobals ? fettiGlobals.x ? fettiGlobals.x < 0.0 ? -100 : 0 : 0 : 0
-
-        const prevBottom = fettiGlobals ? fettiGlobals.y ? fettiGlobals.y > 1 ? 100 : 0 : 0 : 0
-        const prevTop = fettiGlobals ? fettiGlobals.x ? fettiGlobals.x < 0.0 ? -100 : 0 : 0 : 0
-
-        if (fetti.position.x >= (canvas.width + prevRight) || fetti.position.x <= prevLeft) fettis.splice(index, 1)
-        if (fetti.position.y >= (canvas.height + prevBottom) || fetti.position.y <= prevTop) fettis.splice(index, 1)
-
+        if (fetti.position.x > canvas.width || fetti.position.x < 0) fettis.splice(index, 1)
+        if (fetti.position.y > canvas.height || fetti.position.y < 0) fettis.splice(index, 1)
     })
 
     window.requestAnimationFrame(renderConfetti)
