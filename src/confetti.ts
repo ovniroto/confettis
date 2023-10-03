@@ -365,6 +365,7 @@ const renderConfetti = (): void => {
     fettis.forEach((fetti: any, index: number) => {
         if (fetti.position.x > canvas.width || fetti.position.x < 0) fettis.splice(index, 1)
         if (fetti.position.y > canvas.height || fetti.position.y < 0) fettis.splice(index, 1)
+        if (fetti.progress >= 1) fettis.splice(index, 1)
     })
 
     window.requestAnimationFrame(renderConfetti)

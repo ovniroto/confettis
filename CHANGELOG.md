@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.6
+
+Release 3 oct 2023
+
+  * Fix check to delete confetti particles that are not visible.
+
 ### 0.2.5
 
 Release 3 oct 2023

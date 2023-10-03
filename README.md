@@ -1,6 +1,6 @@
 ![Confettis](https://i.imgur.com/GVG84eS.png)
 
-# 🎉 Confettis v0.2.5
+# 🎉 Confettis v0.2.6
 
 [![NPM](https://img.shields.io/npm/v/confettis.svg)](https://www.npmjs.com/package/confettis)
 [![GitHub Issues](https://img.shields.io/github/issues/ovniroto/confettis)](https://github.com/ovniroto/confettis/issues)
@@ -30,12 +30,12 @@ This is a small lib to add confettis to your website. Yep, confettis! 🎉
 
 Browser:
 ```html
-<script src="https://cdn.jsdelivr.net/npm/confettis@0.2.5/lib/confettis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/confettis@0.2.6/lib/confettis.min.js"></script>
 ```
 
 Deno:
 ```js
-import * as confetti from 'https://esm.sh/confettis@0.2.5'
+import * as confetti from 'https://esm.sh/confettis@0.2.6'
 ```
 
 Node:
