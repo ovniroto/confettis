@@ -18,7 +18,7 @@ const confettiGlobals: ConfettiGlobals = {
     scales: [ 0.7, 0.8 ],
     static: false,
     x: 0.5,
-    y: 0.5,
+    y: 0.7,
     z: 100,
     shapes: [ 'square', 'ellipse' ],
     colors: [
@@ -285,73 +285,62 @@ const createConfettiShape = (context: CanvasRenderingContext2D, fetti: ConfettiP
     (context.fillStyle = 'rgba(' + fetti.color.r + ', ' + fetti.color.g + ', ' + fetti.color.b + ', ' + (1 - fetti.progress) + ')') :
     (context.fillStyle = 'rgb(' + fetti.color.r + ', ' + fetti.color.g + ', ' + fetti.color.b + ')')
 
-    if(fetti.shape == 'ellipse') {
+    if(fetti.shape == 'ellipse') createEllipse({
+        context: context,
+        x: fetti.position.x,
+        y: fetti.position.y,
+        rotation: Math.PI / 10 * fetti.wabble.w,
+        radius: {
+            x: Math.abs(x2 - x1) * fetti.scale,
+            y: Math.abs(y2 - y1) * fetti.scale
+        },
+        angle: {
+            start: 0,
+            end: 2 * Math.PI
+        },
+        antiClockwise: false
+    })
 
-        createEllipse({
-            context: context,
-            x: fetti.position.x,
-            y: fetti.position.y,
-            rotation: Math.PI / 10 * fetti.wabble.w,
-            radius: {
-                x: Math.abs(x2 - x1) * fetti.scale,
-                y: Math.abs(y2 - y1) * fetti.scale
-            },
-            angle: {
-                start: 0,
-                end: 2 * Math.PI
-            },
-            antiClockwise: false
-        })
+    if(fetti.shape == 'circle')  createCircle({
+        context: context,
+        x: fetti.position.x,
+        y: fetti.position.y,
+        scale: fetti.scale,
+    })
 
-    } else if(fetti.shape == 'circle') {
+    if(fetti.shape == 'star') createStar({
+        context: context,
+        x: fetti.position.x,
+        y: fetti.position.y,
+        scale: fetti.scale
+    })
 
-        createCircle({
-            context: context,
-            x: fetti.position.x,
-            y: fetti.position.y,
-            scale: fetti.scale,
-        })
+    if(fetti.shape == 'emoji') createEmoji({
+        context: context,
+        emoji: fetti.emoji,
+        x: fetti.position.x,
+        y: fetti.position.y,
+        size: fetti.scale
+    })
 
-    } else if(fetti.shape == 'star') {
+    if(fetti.shape == 'square') createSquare({
+        context: context,
+        x: fetti.position.x,
+        y: fetti.position.y,
+        line1: {
+            x: fetti.wabble.x,
+            y: fetti.position.y
+        },
+        line2: {
+            x: x2,
+            y: y2
+        },
+        line3: {
+            x: x1,
+            y: fetti.wabble.y
+        }
+    })
 
-        createStar({
-            context: context,
-            x: fetti.position.x,
-            y: fetti.position.y,
-            scale: fetti.scale
-        })
-
-    } else if(fetti.shape == 'emoji') {
-
-        createEmoji({
-            context: context,
-            emoji: fetti.emoji,
-            x: fetti.position.x,
-            y: fetti.position.y,
-            size: fetti.scale
-        })
-
-    } else {
-
-        createSquare({
-            context: context,
-            x: fetti.position.x,
-            y: fetti.position.y,
-            line1: {
-                x: fetti.wabble.x,
-                y: fetti.position.y
-            },
-            line2: {
-                x: x2,
-                y: y2
-            },
-            line3: {
-                x: x1,
-                y: fetti.wabble.y
-            }
-        })
-
-    }
 }
 
 /**
@@ -374,8 +363,16 @@ const renderConfetti = (): void => {
     })
 
     fettis.forEach((fetti: any, index: number) => {
-        if (fetti.position.y >= canvas.height || fetti.position.y <= 0) fettis.splice(index, 1)
-        if (fetti.position.x >= canvas.width || fetti.position.x <= 0) fettis.splice(index, 1)
+
+        const prevRight = fettiGlobals ? fettiGlobals.x ? fettiGlobals.x > 1 ? 100 : 0 : 0 : 0
+        const prevLeft = fettiGlobals ? fettiGlobals.x ? fettiGlobals.x < 0.0 ? -100 : 0 : 0 : 0
+
+        const prevBottom = fettiGlobals ? fettiGlobals.y ? fettiGlobals.y > 1 ? 100 : 0 : 0 : 0
+        const prevTop = fettiGlobals ? fettiGlobals.x ? fettiGlobals.x < 0.0 ? -100 : 0 : 0 : 0
+
+        if (fetti.position.x >= (canvas.width + prevRight) || fetti.position.x <= prevLeft) fettis.splice(index, 1)
+        if (fetti.position.y >= (canvas.height + prevBottom) || fetti.position.y <= prevTop) fettis.splice(index, 1)
+
     })
 
     window.requestAnimationFrame(renderConfetti)

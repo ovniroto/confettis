@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.2.4
+
+Release 3 oct 2023
+
+  * Added confeti elimination prevention if created outside of canvas (100 extra pixels).
+  * Added static confetti option to readme.
+  * Change default confetti Y origin to 0.7.
+  * Code refactorization.
+
 ### 0.2.3
 
 Release 2 oct 2023
@@ -14,7 +23,7 @@ Release 2 oct 2023
 
   * Added option to disable ticks (opacity). Put -1 on ticks.
   * Added window checks to avoid server execution errors (SSR).
-  * Changed the z-index by default of the canvas. Now is  Number.MAX_SAFE_INTEGER (2^53 − 1).
+  * Changed the z-index by default of the canvas. Now is  Number.MAX_SAFE_INTEGER (2147483647).
 
 ### 0.1.2
 
