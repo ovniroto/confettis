@@ -20,7 +20,7 @@ This is a small lib to add confettis to your website. Yep, confettis! 🎉
 * 😄 Super easy to use!
 
 ### Demo
-[cofetti.deno.dev](https://cofetti.deno.dev)
+[confetti.deno.dev](https://confetti.deno.dev)
 
 ### Resources
 - [Documentation](https://cofetti.deno.dev/docs)
