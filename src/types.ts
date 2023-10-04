@@ -1,121 +1,78 @@
-export type Emoji = {
-    context: CanvasRenderingContext2D
-    emoji: string
-    x: number
-    y: number
-    size: number
-}
-
-export type Circle = {
-    context: CanvasRenderingContext2D
-    x: number
-    y: number
-    scale: number
-}
-
-export type Ellipse = {
-    context: CanvasRenderingContext2D
-    x: number
-    y: number
-    rotation: number
-    radius: {
-        x: number
-        y: number
-    }
-    angle: {
-        start: number
-        end: number
-    }
-    antiClockwise: boolean
-}
-
-export type Square = {
-    context: CanvasRenderingContext2D
-    x: number
-    y: number
-    line1: {
-        x: number
-        y: number
-    }
-    line2: {
-        x: number
-        y: number
-    }
-    line3: {
-        x: number
-        y: number
-    }
-}
-
-export type Star = {
-    context: CanvasRenderingContext2D
-    scale: number
-    x: number
-    y: number
-}
-
-type Shapes = 'square' | 'ellipse' | 'circle' | 'star' | 'emoji'
+type Shapes = 'square' | 'rectangle' | 'ellipse' | 'circle' | 'star' | 'emoji'
 
 export type ConfettiGlobals = {
+
+    x: number
+    y: number
+    z: number
+
+    canvas?: string
     count: number
-    gravity: number
-    drag: number
-    ticks: number
+
+    gravity: number | number[]
+    ticks: number | number[]
+    speed: number | number[]
+    scale: number | number[]
+
+    overflow: {
+        left: boolean
+        right: boolean
+        top: boolean
+        bottom: boolean
+    }
+
     decay: number
     drift: number
     angle: number
     spread: number
-    velocity: number
-    scales: number[]
-    static: boolean
-    x: number
-    y: number
-    z: number
+    quiet: boolean
+
     shapes: Shapes[]
     colors: string[]
     emojis: string[]
+
 }
 
 export type ConfettiProps = {
+
+    x?: number
+    y?: number
+    z?: number
+
     canvas?: string
     count?: number
-    gravity?: number
-    drag?: number
-    ticks?: number
+
+    gravity?: number | number[]
+    ticks?: number | number[]
+    speed?: number | number[]
+    scale?: number | number[]
+
+    overflow?: {
+        left?: boolean
+        right?: boolean
+        top?: boolean
+        bottom?: boolean
+    }
+
     decay?: number
     drift?: number
     angle?: number
     spread?: number
-    velocity?: number
-    scales?: number[]
-    static?: boolean
-    x?: number
-    y?: number
-    z?: number
+    quiet?: boolean
+
     shapes?: Shapes[]
     colors?: string[]
     emojis?: string[]
+
 }
 
 export type ConfettiProperties = {
-    opacity: boolean
-    tick: number
-    progress: number
-    color: {
-        r: number
-        g: number
-        b: number
-    }
-    shape: string
-    emoji: string
-    gravity: number
-    velocity: number
-    angle2D: number
-    drift: number
-    decay: number
-    scale: number,
+
     random: number
-    static: boolean
+    angle2d: number
+    opacity: boolean
+    progress: number
+
     wabble: {
         w: number
         x: number
@@ -127,19 +84,42 @@ export type ConfettiProperties = {
         sin: number
         cos: number
     }
-    dimensions: {
-        x: number
-        y: number
+    
+    shape: string
+    emoji: string
+
+    tick: number
+    gravity: number
+    speed: number
+    drift: number
+    decay: number
+    scale: number
+    quiet: boolean
+
+    overflow: {
+        left: boolean
+        right: boolean
+        top: boolean
+        bottom: boolean
     }
+
+    color: {
+        r: number
+        g: number
+        b: number
+    }
+
     position: {
         x: number
         y: number
     }
+
     update: () => void
+
 }
 
 export type RGB = {
-    r: number,
-    g: number,
+    r: number
+    g: number
     b: number
 }
