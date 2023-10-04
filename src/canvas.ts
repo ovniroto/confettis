@@ -85,11 +85,11 @@ const setCanvasRectSize = (id: string = "confettis"): void => {
 }
 
 /**
- * Get canvas origin
+ * Get canvas positions
  *
  * @return {void} void
  */
-const getCanvasOrigin = (data?: { id?: string, x?: number, y?: number }): { x: number, y: number } => {
+const getCanvasPos = (data?: { id?: string, x?: number, y?: number }): { x: number, y: number } => {
 
     const id = data ? data.id ? data.id : 'confettis' : 'confettis'
     const x = data ? data.x ? data.x : 0.5 : 0.5
@@ -115,7 +115,7 @@ export {
     createCanvas,
 
     getCanvas,
-    getCanvasOrigin,
+    getCanvasPos,
 
     setCanvasSize,
     setCanvasWindowSize,

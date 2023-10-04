@@ -1,6 +1,6 @@
 /*
  *
- *  🎉 Confettis v0.2.7
+ *  🎉 Confettis v0.3.0
  *  https://github.com/ovniroto/confettis
  *
  *  (c) 2023 Lucas O. S.
@@ -8,23 +8,28 @@
  *
 */
 
-type Shapes = 'square' | 'ellipse' | 'circle' | 'star' | 'emoji';
+type Shapes = 'square' | 'rectangle' | 'ellipse' | 'circle' | 'star' | 'emoji';
 type ConfettiProps = {
+    x?: number;
+    y?: number;
+    z?: number;
     canvas?: string;
     count?: number;
-    gravity?: number;
-    drag?: number;
-    ticks?: number;
+    gravity?: number | number[];
+    ticks?: number | number[];
+    speed?: number | number[];
+    scale?: number | number[];
+    overflow?: {
+        left?: boolean;
+        right?: boolean;
+        top?: boolean;
+        bottom?: boolean;
+    };
     decay?: number;
     drift?: number;
     angle?: number;
     spread?: number;
-    velocity?: number;
-    scales?: number[];
-    static?: boolean;
-    x?: number;
-    y?: number;
-    z?: number;
+    quiet?: boolean;
     shapes?: Shapes[];
     colors?: string[];
     emojis?: string[];

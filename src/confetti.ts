@@ -1,37 +1,53 @@
-import { getCanvas, getCanvasOrigin, setCanvasZIndex } from './canvas'
-import { randomNumberBetween, convertHexToRGB, isSSR } from './utils'
-import { Ellipse, Circle, Square, Star, Emoji, ConfettiProperties, ConfettiGlobals, ConfettiProps, RGB } from './types'
+import { getCanvas, setCanvasZIndex, setCanvasWindowSize } from './canvas'
+import { randomNumber, convertHexToRGB, isSSR, isNumber, convertProps } from './utils'
+import { ConfettiProperties, ConfettiGlobals, ConfettiProps, RGB } from './types'
+
+import emojiShape from './shapes/emoji'
+import ellipseShape from './shapes/ellipse'
+import squareShape from './shapes/square'
+import starShape from './shapes/star'
+import circleShape from './shapes/circle'
+import rectangleShape from './shapes/rectangle'
 
 const fettis: any = []
 let fettiGlobals: ConfettiProps
 
 const confettiGlobals: ConfettiGlobals = {
+
+    x: 0.5,
+    y: 0.7,
+    z: Number.MAX_SAFE_INTEGER,
+
     count: 100,
+
     gravity: 1,
-    drag: 0.075,
     ticks: 300,
-    decay: 0.9,
+    speed: 45,
+    scale: 0.8,
+
+    overflow: {
+        left: false,
+        right: false,
+        top: true,
+        bottom: false,
+    },
+
+    decay: 0.92,
     drift: 0,
     angle: 90,
     spread: 70,
-    velocity: 45,
-    scales: [ 0.7, 0.8 ],
-    static: false,
-    x: 0.5,
-    y: 0.7,
-    z: 100,
+    quiet: false,
+
     shapes: [ 'square', 'ellipse' ],
-    colors: [
-        '#33ffdd',
-        '#29c6ff',
-        '#b980ff',
-        '#ff66ff',
-        '#ff6685',
-        '#ffb54d',
-        '#fcff66',
-        '#91ff66'
-    ],
+    colors: [ '#33ffdd', '#29c6ff', '#b980ff', '#ff66ff', '#ff6685', '#ffb54d', '#fcff66', '#91ff66' ],
     emojis: [ '🛸', '👽', '✨' ]
+
+}
+
+const initConfetti = () => {
+    if (isSSR) return
+    window.addEventListener('resize', () => { setCanvasWindowSize() })
+    window.requestAnimationFrame(renderConfetti)
 }
 
 /**
@@ -40,123 +56,16 @@ const confettiGlobals: ConfettiGlobals = {
  * @return {void}
  */
 const createConfetti = (props?: ConfettiProps): void => {
-    if (isSSR) return
-    fettiGlobals = props ? props : confettiGlobals
-    fillConfettiCannon()
-}
 
-/**
- * Fill confetti cannon
- *
- * @return {void}
- */
-const fillConfettiCannon = (): void => {
+    if (isSSR) return
+
+    fettiGlobals = props ? props : confettiGlobals
     const count = fettiGlobals ? fettiGlobals.count ? fettiGlobals.count : confettiGlobals.count : confettiGlobals.count
+
     for (let i = 0; i < count; i++) {
         fettis.push(confettiProperties())
     }
-}
 
-/**
- * Create emoji confetti
- *
- * @param {Emoji} data
- */
-const createEmoji = (data: Emoji): void => {
-    const context = data.context
-    context.beginPath()
-    context.font = (data.size * 100) + 'px serif'
-    context.fillText(data.emoji, data.x, data.y)
-    context.restore()
-    context.closePath()
-    context.fill()
-}
-
-/**
- * Create circle confetti
- *
- * @param {Circle} data
- */
-const createCircle = (data: Circle): void => {
-    const context = data.context
-    context.beginPath()
-    context.save()
-    context.translate(data.x, data.y)
-    context.arc(0, 0, data.scale * 10, 0, 2 * Math.PI)
-    context.restore()
-    context.closePath()
-    context.fill()
-}
-
-/**
- * Create ellipse confetti
- *
- * @param {Ellipse} data
- */
-const createEllipse = (data: Ellipse): void => {
-    const context = data.context
-    context.beginPath()
-    context.save()
-    context.translate(data.x, data.y)
-    context.rotate(data.rotation)
-    context.scale(data.radius.x, data.radius.y)
-    context.arc(0, 0, 1, data.angle.start, data.angle.end, data.antiClockwise)
-    context.restore()
-    context.closePath()
-    context.fill()
-}
-
-/**
- * Create square confetti
- *
- * @param {Square} data
- */
-const createSquare = (data: Square): void => {
-    const context = data.context
-    context.beginPath()
-    context.moveTo(data.x, data.y)
-    context.lineTo(data.line1.x, data.line1.y)
-    context.lineTo(data.line2.x, data.line2.y)
-    context.lineTo(data.line3.x, data.line3.y)
-    context.closePath()
-    context.fill()
-}
-
-/**
- * Create star confetti
- *
- * @param {Star} data
- */
-const createStar = (data: Star): void => {
-
-    var rotation = (Math.PI / 2) * 3
-    var spikes = 5
-
-    const innerRadius = 4 * data.scale
-    const outerRadius = 8 * data.scale
-    const step = Math.PI / spikes
-
-    const context = data.context
-    context.beginPath()
-
-    while (spikes--) {
-
-        const x1 = data.x + (Math.cos(rotation) * outerRadius)
-        const y1 = data.y + (Math.sin(rotation) * outerRadius)
-
-        context.lineTo(x1, y1)
-        rotation += step
-
-        const x2 = data.x + (Math.cos(rotation) * innerRadius)
-        const y2 = data.y + (Math.sin(rotation) * innerRadius)
-
-        context.lineTo(x2, y2)
-        rotation += step
-
-    }
-
-    context.closePath()
-    context.fill()
 }
 
 /**
@@ -166,80 +75,101 @@ const createStar = (data: Star): void => {
  */
 const confettiProperties = (): ConfettiProperties => {
 
-    const props = fettiGlobals
+    const props = convertProps(fettiGlobals, confettiGlobals)
 
-    const xPos = props ? props.canvas ? getCanvasOrigin({ id: props.canvas }).x : props.x ? getCanvasOrigin({ x: props.x }).x : getCanvasOrigin().x : getCanvasOrigin().x
-    const yPos = props ? props.canvas ? getCanvasOrigin({ id: props.canvas }).y : props.y ? getCanvasOrigin({ y: props.y }).y : getCanvasOrigin().y : getCanvasOrigin().y
-    const colors = props ? props.colors ? props.colors : confettiGlobals.colors : confettiGlobals.colors
-    const shapes = props ? props.shapes ? props.shapes : confettiGlobals.shapes : confettiGlobals.shapes
-    const emojis = props ? props.emojis ? props.emojis : confettiGlobals.emojis : confettiGlobals.emojis
-    const angle = props ? props.angle ? props.angle : confettiGlobals.angle : confettiGlobals.angle
-    const spread = props ? props.spread ? props.spread : confettiGlobals.spread : confettiGlobals.spread
-    const gravity = props ? props.gravity ? props.gravity : confettiGlobals.gravity : confettiGlobals.gravity
-    const velocity = props ? props.velocity ? props.velocity : confettiGlobals.velocity : confettiGlobals.velocity
-    const ticks = props ? props.ticks ? props.ticks : confettiGlobals.ticks : confettiGlobals.ticks
-    const drift = props ? props.drift ? props.drift : confettiGlobals.drift : confettiGlobals.drift
-    const decay = props ? props.decay ? props.decay : confettiGlobals.decay : confettiGlobals.decay
-    const scales = props ? props.scales ? props.scales : confettiGlobals.scales : confettiGlobals.scales
-    
-    const scale = scales[Math.floor(randomNumberBetween(0, scales.length))]
-    const emoji = emojis[Math.floor(randomNumberBetween(0, emojis.length))]
-    const shape = shapes[Math.floor(randomNumberBetween(0, shapes.length))]
-    const color = convertHexToRGB(colors[Math.floor(randomNumberBetween(0, colors.length))]) as unknown as RGB
-    const speed = (velocity * 0.5) + (Math.random() * velocity)
-    
-    const tiltAngle = (Math.random() * (0.75 - 0.25) + 0.25) * Math.PI
-    const radiusAngle = angle * (Math.PI / 180)
-    const radiusSpread = spread * (Math.PI / 180)
-    const angle2D = -radiusAngle + ((0.5 * radiusSpread) - (Math.random() * radiusSpread))
+    const color = convertHexToRGB(props.colors[Math.floor(randomNumber(0, props.colors.length))]) as unknown as RGB
+    const emoji = props.emojis[Math.floor(randomNumber(0, props.emojis.length))]
+    const shape = props.shapes[Math.floor(randomNumber(0, props.shapes.length))]
 
-    const wabble = Math.random() * 10
-    const wabbleSpeed = Math.min(0.11, Math.random() * 0.1 + 0.05)
+    const radius = {
+        angle: props.angle * (Math.PI / 180),
+        spread: props.spread * (Math.PI / 180)
+    }
+    
     const random = Math.random() + 2
+    const angle2d = -radius.angle + ((0.5 * radius.spread) - (Math.random() * radius.spread))
+    const tilt = {
+        angle: (Math.random() * (0.75 - 0.25) + 0.25) * Math.PI,
+        sin: 0,
+        cos: 0
+    }
 
-    const stattic = props ? props.static ? props.static : false : false
+    const gravity = props.gravity * 3
+    const scale = props.scale
+    const speed = (props.speed * 0.5) + (Math.random() * props.speed)
 
+    const opacity = isNumber(props.ticks) ? props.ticks >= 0 : props.ticks[Math.floor(randomNumber(0, props.ticks.length))] >= 0
+    const progress = isNumber(props.ticks) ? props.ticks : props.ticks[Math.floor(randomNumber(0, props.ticks.length))]
+
+    const ticks = 0
+
+    const drift = props.drift
+    const decay = props.decay
+    const quiet = props.quiet
+
+    const overflow = props.overflow
+
+    const x = props.x
+    const y = props.y
+
+    const wabble = {
+        w: Math.random() * 10,
+        speed: Math.min(0.11, Math.random() * 0.1 + 0.05),
+        x: 0,
+        y: 0
+    }
+  
     return {
-        opacity: ticks >= 0,
-        tick: 0,
-        progress: 0,
-        color: color,
+
+        random: random,
+        angle2d: angle2d,
+        opacity: opacity,
+        progress: progress,
+    
+        wabble: {
+            w: wabble.w,
+            x: wabble.x,
+            y: wabble.y,
+            speed: wabble.speed
+        },
+
+        tilt: {
+            angle: tilt.angle,
+            sin: tilt.sin,
+            cos: tilt.cos
+        },
+        
         shape: shape,
         emoji: emoji,
-        gravity: gravity * 3,
-        velocity: speed,
-        angle2D: angle2D,
+    
+        tick: ticks,
+        gravity: gravity,
+        speed: speed,
         drift: drift,
         decay: decay,
         scale: scale,
-        random: random,
-        static: stattic,
-        wabble: {
-            w: wabble,
-            x: 0,
-            y: 0,
-            speed: wabbleSpeed
+        quiet: quiet,
+
+        overflow: overflow,
+    
+        color: {
+            r: color.r,
+            g: color.g,
+            b: color.b
         },
-        tilt: {
-            angle: tiltAngle,
-            sin: 0,
-            cos: 0
-        },
-        dimensions: {
-            x: randomNumberBetween(4, 8),
-            y: randomNumberBetween(6, 12)
-        },
+
         position: {
-            x: xPos,
-            y: yPos
+            x: x,
+            y: y
         },
+    
         update: function () {
 
-            this.position.x += Math.cos(this.angle2D) * this.velocity + this.drift
-            this.position.y += Math.sin(this.angle2D) * this.velocity + this.gravity
-            this.velocity *= this.decay
+            this.position.x += Math.cos(this.angle2d) * this.speed + this.drift
+            this.position.y += Math.sin(this.angle2d) * this.speed + this.gravity
+            this.speed *= this.decay
 
-            if(this.static) {
+            if(this.quiet) {
 
                 this.tilt.sin = 0
                 this.tilt.cos = 0
@@ -262,10 +192,12 @@ const confettiProperties = (): ConfettiProperties => {
                 
             }
 
-            this.progress = (this.tick++) / ticks
+            this.progress = (this.tick++) / progress
 
         }
+
     }
+
 }
 
 /**
@@ -276,70 +208,16 @@ const confettiProperties = (): ConfettiProperties => {
  */
 const createConfettiShape = (context: CanvasRenderingContext2D, fetti: ConfettiProperties): void => {
 
-    var x1 = fetti.position.x + (fetti.random * fetti.tilt.cos)
-    var y1 = fetti.position.y + (fetti.random * fetti.tilt.sin)
-    var x2 = fetti.wabble.x + (fetti.random * fetti.tilt.cos)
-    var y2 = fetti.wabble.y + (fetti.random * fetti.tilt.sin)
-
     fetti.opacity ? 
     (context.fillStyle = 'rgba(' + fetti.color.r + ', ' + fetti.color.g + ', ' + fetti.color.b + ', ' + (1 - fetti.progress) + ')') :
     (context.fillStyle = 'rgb(' + fetti.color.r + ', ' + fetti.color.g + ', ' + fetti.color.b + ')')
 
-    if(fetti.shape == 'ellipse') createEllipse({
-        context: context,
-        x: fetti.position.x,
-        y: fetti.position.y,
-        rotation: Math.PI / 10 * fetti.wabble.w,
-        radius: {
-            x: Math.abs(x2 - x1) * fetti.scale,
-            y: Math.abs(y2 - y1) * fetti.scale
-        },
-        angle: {
-            start: 0,
-            end: 2 * Math.PI
-        },
-        antiClockwise: false
-    })
-
-    if(fetti.shape == 'circle')  createCircle({
-        context: context,
-        x: fetti.position.x,
-        y: fetti.position.y,
-        scale: fetti.scale,
-    })
-
-    if(fetti.shape == 'star') createStar({
-        context: context,
-        x: fetti.position.x,
-        y: fetti.position.y,
-        scale: fetti.scale
-    })
-
-    if(fetti.shape == 'emoji') createEmoji({
-        context: context,
-        emoji: fetti.emoji,
-        x: fetti.position.x,
-        y: fetti.position.y,
-        size: fetti.scale
-    })
-
-    if(fetti.shape == 'square') createSquare({
-        context: context,
-        x: fetti.position.x,
-        y: fetti.position.y,
-        line1: {
-            x: fetti.wabble.x,
-            y: fetti.position.y
-        },
-        line2: {
-            x: x2,
-            y: y2
-        },
-        line3: {
-            x: x1,
-            y: fetti.wabble.y
-        }
-    })
+    if(fetti.shape == 'square') squareShape(context, fetti)
+    if(fetti.shape == 'ellipse') ellipseShape(context, fetti)
+    if(fetti.shape == 'rectangle') rectangleShape(context, fetti)
+    if(fetti.shape == 'circle')  circleShape(context, fetti)
+    if(fetti.shape == 'star') starShape(context, fetti)
+    if(fetti.shape == 'emoji') emojiShape(context, fetti)
 
 }
 
@@ -363,9 +241,15 @@ const renderConfetti = (): void => {
     })
 
     fettis.forEach((fetti: any, index: number) => {
-        if (fetti.position.x > canvas.width || fetti.position.x < 0) fettis.splice(index, 1)
-        if (fetti.position.y > canvas.height || fetti.position.y < 0) fettis.splice(index, 1)
+
+        if(!fetti.overflow?.left && fetti.position.x < 0) fettis.splice(index, 1)
+        if(!fetti.overflow?.right && fetti.position.x > canvas.width) fettis.splice(index, 1)
+
+        if(!fetti.overflow?.top && fetti.position.y < 0) fettis.splice(index, 1)
+        if(!fetti.overflow?.bottom && fetti.position.y > canvas.height) fettis.splice(index, 1)
+        
         if (fetti.progress >= 1) fettis.splice(index, 1)
+
     })
 
     window.requestAnimationFrame(renderConfetti)
@@ -374,5 +258,5 @@ const renderConfetti = (): void => {
 
 export {
     createConfetti,
-    renderConfetti
+    initConfetti
 }
