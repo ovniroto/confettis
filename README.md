@@ -1,14 +1,14 @@
 ![Confettis](https://i.imgur.com/oXnRs6s.png)
 
-# 🎉 Confettis v0.3.0
-
 [![NPM](https://img.shields.io/npm/v/confettis.svg)](https://www.npmjs.com/package/confettis)
 [![GitHub Issues](https://img.shields.io/github/issues/ovniroto/confettis)](https://github.com/ovniroto/confettis/issues)
 [![GitHub Tag](https://img.shields.io/github/tag/ovniroto/confettis.svg)](https://github.com/ovniroto/confettis/tags)
 [![GitHub Commits](https://img.shields.io/github/commit-activity/t/ovniroto/confettis)](https://github.com/ovniroto/confettis/commits/main/)
 [![GitHub License](https://img.shields.io/github/license/ovniroto/confettis)](https://github.com/ovniroto/confettis/blob/main/LICENSE)
 
-This is a small lib to add confettis to your website. Yep, confettis! 🎉
+# 🎉 Confettis v0.3.0
+
+Confettis is a small lib to add confettis to your website. Yep, confettis! 🎉
 
 * 😊 SSR Support
 * 🎉 Common confettis
@@ -20,10 +20,10 @@ This is a small lib to add confettis to your website. Yep, confettis! 🎉
 * 😄 Super easy to use!
 
 ### Demo
-[confetti.deno.dev](https://confetti.deno.dev)
+[confettis.ovni.dev](https://confettis.ovni.dev)
 
 ### Resources
-- [Documentation](https://cofetti.deno.dev/docs)
+- [Documentation](https://confettis.ovni.dev/docs)
 - [Changelog](https://github.com/ovniroto/confettis/blob/main/CHANGELOG.md)
 
 ## Installation
@@ -68,7 +68,7 @@ confetti.create({
 })
 ```
 
-This is just an example, but you can do anything. I recommend you look at the examples I have put on the web! See more examples [here](https://confetti.deno.dev)!
+This is just an example, but you can do anything. I recommend you look at the examples I have put on the web! See more examples [here](https://confettis.ovni.dev)!
 
 ## Parameters
 
