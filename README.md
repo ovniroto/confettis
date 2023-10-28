@@ -1,4 +1,4 @@
-![Confettis](https://i.imgur.com/oXnRs6s.png)
+![Confettis](https://i.imgur.com/kpJt6R7.png)
 
 [![NPM](https://img.shields.io/npm/v/confettis.svg)](https://www.npmjs.com/package/confettis)
 [![GitHub Issues](https://img.shields.io/github/issues/ovniroto/confettis)](https://github.com/ovniroto/confettis/issues)
