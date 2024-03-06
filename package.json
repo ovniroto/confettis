@@ -41,7 +41,7 @@
         "bundle:types": "cross-env NODE_ENV=types rollup -c --bundleConfigAsCjs"
     },
     "devDependencies": {
-        "@rollup/plugin-babel": "^6.0.3",
+        "@rollup/plugin-babel": "^7.23.4",
         "@rollup/plugin-node-resolve": "^15.2.1",
         "@rollup/plugin-terser": "^0.4.3",
         "@rollup/plugin-typescript": "^11.1.4",
