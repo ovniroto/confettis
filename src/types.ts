@@ -6,7 +6,7 @@ export type ConfettiGlobals = {
     y: number
     z: number
 
-    canvas?: string
+    canvas: string
     count: number
 
     gravity: number | number[]

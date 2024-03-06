@@ -1,5 +1,1 @@
-import { initConfetti } from './confetti'
-
-export { createConfetti as create } from './confetti'
-
-initConfetti()
+export { createConfetti as create, reset } from './confetti'

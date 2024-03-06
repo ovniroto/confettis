@@ -6,7 +6,7 @@
 [![GitHub Commits](https://img.shields.io/github/commit-activity/t/ovniroto/confettis)](https://github.com/ovniroto/confettis/commits/main/)
 [![GitHub License](https://img.shields.io/github/license/ovniroto/confettis)](https://github.com/ovniroto/confettis/blob/main/LICENSE)
 
-# 🎉 Confettis v0.3.1
+# 🎉 Confettis v0.3.3
 
 Confettis is a small lib to add confettis to your website. Yep, confettis! 🎉
 
@@ -30,12 +30,12 @@ Confettis is a small lib to add confettis to your website. Yep, confettis! 🎉
 
 Browser:
 ```html
-<script src="https://cdn.jsdelivr.net/npm/confettis@0.3.1/lib/confettis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/confettis@0.3.3/lib/confettis.min.js"></script>
 ```
 
 Deno:
 ```js
-import * as confetti from 'https://esm.sh/confettis@0.3.1'
+import * as confetti from 'https://esm.sh/confettis@0.3.3'
 ```
 
 Node:

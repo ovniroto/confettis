@@ -1,4 +1,4 @@
-import { getCanvas, setCanvasZIndex, setCanvasWindowSize, createCanvas } from './canvas'
+import { getCanvas, setCanvasZIndex, setCanvasWindowSize } from './canvas'
 import { randomNumber, convertHexToRGB, isSSR, isNumber, convertProps } from './utils'
 import { ConfettiProperties, ConfettiGlobals, ConfettiProps, RGB } from './types'
 
@@ -10,7 +10,6 @@ import circleShape from './shapes/circle'
 import rectangleShape from './shapes/rectangle'
 
 const fettis: any = []
-let fettiGlobals: ConfettiProps
 
 const confettiGlobals: ConfettiGlobals = {
 
@@ -18,6 +17,8 @@ const confettiGlobals: ConfettiGlobals = {
     y: 0.7,
     z: Number.MAX_SAFE_INTEGER,
 
+    canvas: 'confettis',
+    
     count: 100,
 
     gravity: 1,
@@ -44,10 +45,16 @@ const confettiGlobals: ConfettiGlobals = {
 
 }
 
+let fettiGlobals: ConfettiGlobals = confettiGlobals
+let confettiInitialized: boolean = false
+let animationFrame: any = null
+
 const initConfetti = () => {
     if (isSSR) return
+    if (confettiInitialized) return
     window.addEventListener('resize', () => { setCanvasWindowSize() })
-    window.requestAnimationFrame(renderConfetti)
+    animationFrame = window.requestAnimationFrame(renderConfetti)
+    confettiInitialized = true
 }
 
 /**
@@ -59,12 +66,15 @@ const createConfetti = (props?: ConfettiProps): void => {
 
     if (isSSR) return
 
-    fettiGlobals = props ? props : confettiGlobals
-    const count = fettiGlobals ? fettiGlobals.count ? fettiGlobals.count : confettiGlobals.count : confettiGlobals.count
+    fettiGlobals = { ...confettiGlobals, ...props as any }
+
+    let count = fettiGlobals.count as unknown as number
 
     for (let i = 0; i < count; i++) {
         fettis.push(confettiProperties())
     }
+
+    initConfetti()
 
 }
 
@@ -228,10 +238,12 @@ const createConfettiShape = (context: CanvasRenderingContext2D, fetti: ConfettiP
  */
 const renderConfetti = (): void => {
 
-    const canvas = fettiGlobals ? fettiGlobals.canvas !== undefined ? getCanvas(fettiGlobals.canvas) : createCanvas() : createCanvas()
+    const canvas = getCanvas(fettiGlobals.canvas as unknown as string)
+    if(!canvas) return
+
     const context: any = canvas.getContext("2d")
 
-    fettiGlobals ? fettiGlobals.z ? setCanvasZIndex(canvas.id, fettiGlobals.z) : '' : ''
+    if(fettiGlobals.z < Number.MAX_SAFE_INTEGER) setCanvasZIndex(canvas.id, fettiGlobals.z)
 
     context.clearRect(0, 0, canvas.width, canvas.height)
     
@@ -252,11 +264,22 @@ const renderConfetti = (): void => {
 
     })
 
-    window.requestAnimationFrame(renderConfetti)
+    animationFrame = window.requestAnimationFrame(renderConfetti)
+}
 
+/**
+ * Reset confetti
+ *
+ * @return {void} 
+ */
+const reset = (): void => {
+    if(animationFrame) {
+        window.cancelAnimationFrame(animationFrame)
+        animationFrame = null
+    }
 }
 
 export {
     createConfetti,
-    initConfetti
+    reset
 }

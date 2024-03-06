@@ -1,6 +1,6 @@
 /*
  *
- *  🎉 Confettis v0.3.1
+ *  🎉 Confettis v0.3.3
  *  https://github.com/ovniroto/confettis
  *
  *  (c) 2024 Lucas O. S.
@@ -41,5 +41,11 @@ type ConfettiProps = {
  * @return {void}
  */
 declare const createConfetti: (props?: ConfettiProps) => void;
+/**
+ * Reset confetti
+ *
+ * @return {void}
+ */
+declare const reset: () => void;
 
-export { createConfetti as create };
+export { createConfetti as create, reset };
