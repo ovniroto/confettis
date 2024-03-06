@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.3.3
+
+Release 6 mar 2024
+
+  * Added `reset` function
+  * Fixed canvas creation
+
 ### 0.3.0
 
 Release 5 oct 2023
