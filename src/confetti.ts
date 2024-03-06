@@ -1,4 +1,4 @@
-import { getCanvas, setCanvasZIndex, setCanvasWindowSize } from './canvas'
+import { getCanvas, setCanvasZIndex, setCanvasWindowSize, createCanvas } from './canvas'
 import { randomNumber, convertHexToRGB, isSSR, isNumber, convertProps } from './utils'
 import { ConfettiProperties, ConfettiGlobals, ConfettiProps, RGB } from './types'
 
@@ -228,7 +228,7 @@ const createConfettiShape = (context: CanvasRenderingContext2D, fetti: ConfettiP
  */
 const renderConfetti = (): void => {
 
-    const canvas = fettiGlobals ? fettiGlobals.canvas ? getCanvas(fettiGlobals.canvas) : getCanvas() : getCanvas()
+    const canvas = fettiGlobals ? fettiGlobals.canvas !== undefined ? getCanvas(fettiGlobals.canvas) : createCanvas() : createCanvas()
     const context: any = canvas.getContext("2d")
 
     fettiGlobals ? fettiGlobals.z ? setCanvasZIndex(canvas.id, fettiGlobals.z) : '' : ''

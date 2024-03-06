@@ -1,6 +1,6 @@
 {
     "name": "confettis",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "Confettis 🎉 for web!",
     "keywords": [
         "canvas",
@@ -26,7 +26,6 @@
         "url": "git+https://github.com/ovniroto/confettis.git"
     },
     "files": [
-        "src",
         "lib"
     ],
     "scripts": {

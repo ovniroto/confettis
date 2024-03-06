@@ -42,10 +42,8 @@ const setCanvasZIndex = (id: string = "confettis", z: number = Number.MAX_SAFE_I
  * @param {string} id `string` Default "confettis"
  * @return {HTMLCanvasElement}  HTMLCanvasElement
  */
-const getCanvas = (id: string = "confettis"): HTMLCanvasElement => {
-    let canvas = document.getElementById(id) as unknown as HTMLCanvasElement
-    if(!canvas) canvas = createCanvas()
-    return canvas
+const getCanvas = (id: string): HTMLCanvasElement => {
+    return document.getElementById(id) as unknown as HTMLCanvasElement
 }
 
 /**

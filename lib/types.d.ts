@@ -1,9 +1,9 @@
 /*
  *
- *  🎉 Confettis v0.3.0
+ *  🎉 Confettis v0.3.1
  *  https://github.com/ovniroto/confettis
  *
- *  (c) 2023 Lucas O. S.
+ *  (c) 2024 Lucas O. S.
  *  Confettis may be freely distributed under the MIT license.
  *
 */
