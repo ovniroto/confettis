@@ -273,8 +273,9 @@ const renderConfetti = (): void => {
  * @return {void} 
  */
 const reset = (): void => {
-    if(animationFrame) {
+    if(confettiInitialized && animationFrame) {
         window.cancelAnimationFrame(animationFrame)
+        confettiInitialized = false
         animationFrame = null
     }
 }
