@@ -52,7 +52,7 @@ let animationFrame: any = null
 const initConfetti = () => {
     if (isSSR) return
     if (confettiInitialized) return
-    window.addEventListener('resize', () => { setCanvasWindowSize() })
+    window.addEventListener('resize', () => { setCanvasWindowSize(fettiGlobals.canvas) })
     animationFrame = window.requestAnimationFrame(renderConfetti)
     confettiInitialized = true
 }

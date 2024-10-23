@@ -3,14 +3,14 @@
  *
  * @return {HTMLCanvasElement} HTMLCanvasElement
  */
-const createCanvas = (): HTMLCanvasElement => {
+const createCanvas = (id: string = "confettis"): HTMLCanvasElement => {
 
     const canvas = document.createElement("canvas")
 
     canvas.width = document.documentElement.clientWidth
     canvas.height = document.documentElement.clientHeight
 
-    canvas.id = "confettis"
+    canvas.id = id
 
     canvas.style.zIndex = `${Number.MAX_SAFE_INTEGER}`
     canvas.style.position = 'fixed'
@@ -44,7 +44,7 @@ const setCanvasZIndex = (id: string = "confettis", z: number = Number.MAX_SAFE_I
  */
 const getCanvas = (id: string = "confettis"): HTMLCanvasElement => {
     let canvas = document.getElementById(id) as unknown as HTMLCanvasElement
-    if(!canvas) canvas = createCanvas()
+    if(!canvas) canvas = createCanvas(id)
     return canvas
 }
 
