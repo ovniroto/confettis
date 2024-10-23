@@ -42,8 +42,39 @@ export const convertProps = (props: any, globals: ConfettiGlobals): any => {
 
     let x, y, colors, shapes, emojis, angle, spread, gravity, speed, ticks, drift, decay, scale, quiet, overflow
 
-    x = props ? props.canvas ? getCanvasPos({ id: props.canvas }).x : props.x ? getCanvasPos({ x: props.x }).x : getCanvasPos().x : x = getCanvasPos().x
-    y = props ? props.canvas ? getCanvasPos({ id: props.canvas }).y : props.y ? getCanvasPos({ y: props.y }).y : getCanvasPos().y : y = getCanvasPos().y
+    if(props) {
+
+        if (props.canvas) {
+
+            if (props.x) {
+                x = getCanvasPos({ id: props.canvas, x: props.x }).x
+            } else {
+                x = getCanvasPos({ id: props.canvas, x: globals.x }).x
+            }
+
+            if (props.y) {
+                y = getCanvasPos({ id: props.canvas, y: props.y }).y
+            } else {
+                y = getCanvasPos({ id: props.canvas, y: globals.y }).y
+            }
+
+        } else {
+
+            if(props.x) {
+                x = getCanvasPos({ x: props.x }).x
+            } else {
+                x = getCanvasPos({ x: globals.x }).x
+            }
+
+            if(props.y) {
+                y = getCanvasPos({ y: props.y }).y
+            } else {
+                y = getCanvasPos({ y: globals.y }).y
+            }
+
+        }
+
+    }
 
     colors = props ? props.colors ? props.colors : globals.colors : globals.colors
     shapes = props ? props.shapes ? props.shapes : globals.shapes : globals.shapes
@@ -61,7 +92,7 @@ export const convertProps = (props: any, globals: ConfettiGlobals): any => {
         top: props ? props.overflow ? props.overflow.top ? props.overflow.top : globals.overflow.top : globals.overflow.top : globals.overflow.top,
         bottom: props ? props.overflow ? props.overflow.bottom ? props.overflow.bottom : globals.overflow.bottom : globals.overflow.bottom : globals.overflow.bottom
     }
-    
+
     spread = props ? props.spread ? props.spread : globals.spread : globals.spread
     angle = props ? props.angle ? props.angle : globals.angle : globals.angle
     ticks = props ? props.ticks ? props.ticks : globals.ticks : globals.ticks
@@ -88,9 +119,9 @@ export const convertProps = (props: any, globals: ConfettiGlobals): any => {
         drift,
         decay,
         quiet,
-        
+
         overflow
-        
+
     }
 
 }
