@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.6
+
+Release 23 oct 2024
+
+  * Fixed canvas creation
+
 ### 0.3.5
 
 Release 23 oct 2024
