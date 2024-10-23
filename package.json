@@ -1,6 +1,6 @@
 {
     "name": "confettis",
-    "version": "0.3.4",
+    "version": "0.3.5",
     "description": "Confettis 🎉 for web!",
     "keywords": [
         "canvas",
@@ -32,7 +32,7 @@
         "build": "npm run clean:lib && npm run bundle && npm run clean:dts && npm run setup",
         "setup": "node ./build/setup.js",
         "clean:lib": "rimraf lib",
-        "clean:dts": "rimraf lib/dts",
+        "clean:dts": "rimraf types",
         "bundle": "npm-run-all bundle:**",
         "bundle:cjs": "cross-env NODE_ENV=cjs rollup -c --bundleConfigAsCjs",
         "bundle:umd": "cross-env NODE_ENV=umd rollup -c --bundleConfigAsCjs",
@@ -41,17 +41,17 @@
         "bundle:types": "cross-env NODE_ENV=types rollup -c --bundleConfigAsCjs"
     },
     "devDependencies": {
-        "@rollup/plugin-babel": "^7.23.4",
-        "@rollup/plugin-node-resolve": "^15.2.1",
-        "@rollup/plugin-terser": "^0.4.3",
-        "@rollup/plugin-typescript": "^11.1.4",
-        "@types/node": "^20.8.0",
-        "cross-env": "^7.0.3",
-        "npm-run-all": "^4.1.5",
-        "rimraf": "^5.0.5",
-        "rollup": "^3.29.4",
-        "rollup-plugin-dts": "^6.0.2",
-        "tslib": "^2.6.2",
-        "typescript": "^5.2.2"
+        "@rollup/plugin-babel": "6.0.4",
+        "@rollup/plugin-node-resolve": "15.3.0",
+        "@rollup/plugin-terser": "0.4.4",
+        "@rollup/plugin-typescript": "12.1.1",
+        "@types/node": "22.7.9",
+        "cross-env": "7.0.3",
+        "npm-run-all": "4.1.5",
+        "rimraf": "6.0.1",
+        "rollup": "4.24.0",
+        "rollup-plugin-dts": "6.1.1",
+        "tslib": "2.8.0",
+        "typescript": "5.6.3"
     }
 }

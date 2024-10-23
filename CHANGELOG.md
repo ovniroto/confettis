@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.3.5
+
+Release 23 oct 2024
+
+  * Fixed canvas spawn position
+
+### 0.3.4
+
+Release 6 mar 2024
+
+  * Fixed init after reset
+
 ### 0.3.3
 
 Release 6 mar 2024
