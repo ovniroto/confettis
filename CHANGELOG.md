@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.7
+
+Release 25 oct 2024
+
+  * Fixed shape type
+
 ### 0.3.6
 
 Release 23 oct 2024
