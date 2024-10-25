@@ -1,6 +1,6 @@
 /*
  *
- *  🎉 Confettis v0.3.6
+ *  🎉 Confettis v0.3.7
  *  https://github.com/ovniroto/confettis
  *
  *  (c) 2024 Lucas O. S.
@@ -8,7 +8,6 @@
  *
 */
 
-type Shapes = 'square' | 'rectangle' | 'ellipse' | 'circle' | 'star' | 'emoji';
 type ConfettiProps = {
     x?: number;
     y?: number;
@@ -30,7 +29,7 @@ type ConfettiProps = {
     angle?: number;
     spread?: number;
     quiet?: boolean;
-    shapes?: Shapes[];
+    shapes?: string[];
     colors?: string[];
     emojis?: string[];
 };

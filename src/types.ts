@@ -60,7 +60,7 @@ export type ConfettiProps = {
     spread?: number
     quiet?: boolean
 
-    shapes?: Shapes[]
+    shapes?: string[]
     colors?: string[]
     emojis?: string[]
 
@@ -84,7 +84,7 @@ export type ConfettiProperties = {
         sin: number
         cos: number
     }
-    
+
     shape: string
     emoji: string
 
